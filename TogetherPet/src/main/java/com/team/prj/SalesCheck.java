@@ -15,7 +15,6 @@ public class SalesCheck {
 	@Autowired
 	ClassReserveService cr;
 	
-//	@Scheduled(cron="0 0 0 * * * ") // 매일 자정
 	@Scheduled(cron="0 0 11 * * ?") // 매일 오전 11시
 	public void salesCheck() {
 		order.updateMinusYN();
