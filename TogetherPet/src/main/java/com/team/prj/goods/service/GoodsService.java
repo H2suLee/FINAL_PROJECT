@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.team.prj.admin.service.ProfitVO;
 import com.team.prj.orders.service.OrderVO;
 import com.team.prj.photo.service.PhotoVO;
 import com.team.prj.review.service.ReviewVO;
+import com.team.prj.seller.service.SellerVO;
 import com.team.prj.state.service.StateVO;
 
 public interface GoodsService {
@@ -68,5 +70,5 @@ public interface GoodsService {
 	
 	// 교환요청 상태 업데이트(1004 선희 추가)
 	int changeUpdate(StateVO vo);
-
+	
 }

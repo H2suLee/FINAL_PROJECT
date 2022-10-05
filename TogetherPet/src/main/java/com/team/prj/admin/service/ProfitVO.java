@@ -9,7 +9,7 @@ public class ProfitVO {
 
 	private String minusDt;
 	private String orderDt;
-	private int userNo;
+	private int no, userNo;
 	private String userName;
 	private int sellerNo;
 	private String sellerName;

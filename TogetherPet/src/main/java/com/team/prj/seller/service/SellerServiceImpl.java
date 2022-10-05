@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team.prj.admin.service.ProfitVO;
 import com.team.prj.goods.service.GoodsVO;
 import com.team.prj.seller.mapper.SellerMapper;
 
@@ -53,6 +54,11 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public int goodsInsert(GoodsVO vo) {
 		return map.goodsInsert(vo);
+	}
+
+	@Override
+	public List<ProfitVO> sellerProfitList(SellerVO vo) {
+		return map.sellerProfitList(vo);
 	}
 
 	

@@ -2,6 +2,7 @@ package com.team.prj.seller.mapper;
 
 import java.util.List;
 
+import com.team.prj.admin.service.ProfitVO;
 import com.team.prj.goods.service.GoodsVO;
 import com.team.prj.seller.service.SellerVO;
 
@@ -26,4 +27,8 @@ public interface SellerMapper {
 
 	// 판매자 상품 등록
 	int goodsInsert(GoodsVO vo);
+	
+	// 정산내역조회(1005 희수 추가)
+	List<ProfitVO> sellerProfitList(SellerVO vo);
+
 }

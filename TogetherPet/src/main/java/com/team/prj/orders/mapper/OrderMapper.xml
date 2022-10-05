@@ -66,7 +66,7 @@
 	<update id="updateMinusYN">
 		update orders
 		set minus_yn='1', minus_date=sysdate
-		where delivery_state=5 and minus_yn != 1
+		where delivery_state=7 and minus_yn != 1
 	</update>
 	
 </mapper>

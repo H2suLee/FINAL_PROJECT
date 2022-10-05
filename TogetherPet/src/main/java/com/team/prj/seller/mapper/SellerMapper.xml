@@ -128,4 +128,20 @@
 		where group_no = #{groupNo}
 		and name = '리스트'
 	</select>
+	
+	<!-- 정산관리, 정산내역 전체조회 -->
+	<select id="sellerProfitList" resultType="com.team.prj.admin.service.ProfitVO">
+		select no,
+			   to_char(minus_dt, 'yyyy-mm-dd') minus_dt, 
+			   to_char(order_dt, 'yyyy-mm-dd') order_dt, 
+		       user_name, 
+		       seller_name, 
+		       category_id, 
+		       name, 
+		       total_price, 
+		       minus_price, 
+		       minus_yn 
+		from   profit 
+		where  seller_no=#{sellerNo}
+	</select>
 </mapper>

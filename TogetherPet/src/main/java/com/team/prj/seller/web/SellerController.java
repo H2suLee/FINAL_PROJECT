@@ -2,9 +2,9 @@ package com.team.prj.seller.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.team.prj.admin.service.ProfitVO;
 import com.team.prj.goods.service.GoodsService;
 import com.team.prj.goods.service.GoodsVO;
 import com.team.prj.orders.service.OrderVO;
@@ -240,6 +241,18 @@ public class SellerController {
 	public String changeUpdate(StateVO svo) {
 		goods.changeUpdate(svo);
 		return "redirect:/sellerCanList";
+	}
+	
+	// 정산 페이지 // 1005 희수 추가
+	@RequestMapping("/sellerProfitList")
+	public String profitPageCall(Model model, SellerVO svo, HttpSession session) {
+		svo = (SellerVO) session.getAttribute("seller");
+		svo.setSellerNo(svo.getSellerNo());
+		List<ProfitVO> list = seller.sellerProfitList(svo);
+		System.out.println("=====================================");
+		System.out.println(list.toString());
+		model.addAttribute("profitList", list);
+		return "seller/sellerProfitList";
 	}
 
 }

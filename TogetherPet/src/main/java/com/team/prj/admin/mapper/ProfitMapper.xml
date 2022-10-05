@@ -4,27 +4,26 @@
 	<!-- 일별 리스트 -->
 	<select id="profitList"
 		resultType="com.team.prj.admin.service.ProfitVO">
-		select to_char(minus_dt, 'yyyy-mm-dd') as minus_dt,
-		to_char(order_dt,
-		'yy/mm/dd') as order_dt,
-		user_no,
-		user_name,
-		seller_no,
-		seller_name,
-		category_id,
-		name,
-		total_price,
-		minus_price,
-		profit,
-		minus_yn
-		from profit
-		where minus_yn='1'
+		select  to_char(minus_dt, 'yyyy-mm-dd') as minus_dt,
+				to_char(order_dt, 'yyyy-mm-dd') as order_dt,
+				user_no,
+				user_name,
+				seller_no,
+				seller_name,
+				category_id,
+				name,
+				total_price,
+				minus_price,
+				profit,
+				minus_yn
+		from    profit
+		where   minus_yn='1'
 		<!-- 날짜 선택하여 조회할 경우 -->
 		<if test="start != null and end != null">
-			and minus_dt
-			between to_date(#{start}, 'yyyy-mm-dd')
-			and
-			TO_CHAR(to_date(#{end}, 'yyyy-mm-dd') + INTERVAL '1' DAY, 'yyyy-mm-dd')
+				and minus_dt
+					between to_date(#{start}, 'yyyy-mm-dd')
+					and
+					to_char(to_date(#{end}, 'yyyy-mm-dd') + INTERVAL '1' DAY, 'yyyy-mm-dd')
 		</if>
 	</select>
 

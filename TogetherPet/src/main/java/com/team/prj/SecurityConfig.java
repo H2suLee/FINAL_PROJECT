@@ -39,7 +39,7 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests((requests) -> 
 							requests
-							.antMatchers("/", "/index", "/join/**", "/login", "/shop", "/member/**",
+							.antMatchers("/", "/index", "/join/**", "/login", "/shop", "/member/**", "/assets/**", "/admin/**", "/fullcalendar/**","/js/**",
 									"/joinMain", "/loginForm", "/sellerJoinForm", "/tutorJoinForm", "/userJoinForm").permitAll()
 							.antMatchers("/manager/**").hasAuthority("ROLE_ADMIN")
 							.anyRequest().authenticated())
@@ -63,11 +63,13 @@ public class SecurityConfig {
 
 		return http.build();
 	}
-
+	
+	
+	/* 희수 수정 (1005)
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
 		return (web) -> web.ignoring().antMatchers("/assets/**", "/admin/**", "/fullcalendar/**","/js/**");
 	}
-
+	 */
 	
 }

@@ -1,4 +1,5 @@
-package com.team.prj.goods.web;
+package com.team.prj;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

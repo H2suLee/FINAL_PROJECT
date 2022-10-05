@@ -2,6 +2,7 @@ package com.team.prj.seller.service;
 
 import java.util.List;
 
+import com.team.prj.admin.service.ProfitVO;
 import com.team.prj.goods.service.GoodsVO;
 
 public interface SellerService {
@@ -25,4 +26,7 @@ public interface SellerService {
 	
 	// 판매자 상품 등록
 	int goodsInsert(GoodsVO vo);
+	
+	// 정산내역조회(1005 희수 추가)
+	List<ProfitVO> sellerProfitList(SellerVO vo);
 }

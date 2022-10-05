@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout_seller}">
+<head>
+<meta charset="UTF-8">
+<title>Together Pet</title>
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	th:content="${_csrf.headerName}" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+	rel="stylesheet" />
+
+<!-- Vendors CSS -->
+<link rel="stylesheet"
+	href="/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+<!-- Helpers -->
+<script src="/admin/assets/vendor/js/helpers.js"></script>
+
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script src="/admin/assets/js/config.js"></script>
+<!-- 
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ -->
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+<script
+	src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script
+	src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+<script
+	src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<!-- 
+<link rel="stylesheet" href="/assets/css/jquery-ui.css">
+ -->
+
+<style>
+.search-box .form-control {
+	width: 48%;
+	display: inline;
+}
+
+#search {
+	font-weight: bold;
+	font-size: 17px;
+}
+</style>
+<script>
+	$(document).ready(function() {
+
+		$('#tb').DataTable();
+		/*
+		dom : '<"dt_title">iftp<"dt_btn">',
+		info : true,
+		language : {
+			info : "총 _TOTAL_건"
+		}
+		 */
+		//$("div.dt_title").html('dom 커스텀 하기');
+	})
+</script>
+</head>
+<body>
+	<div class="col-lg-10 col-md-12" layout:fragment="content">
+		<!--shop wrapper start-->
+		<!-- Content wrapper -->
+		<div class="content-wrapper">
+			<!-- Content -->
+			<div class="container-xxl flex-grow-1 container-p-y">
+				<!--breadcrumbs area start-->
+				<div class="breadcrumb_content">
+					<ul>
+						<li><a href="/">home</a></li>
+						<li>my page</li>
+						<li>정산관리</li>
+					</ul>
+				</div>
+				<!--breadcrumbs area end-->
+
+				<!-- 검색 -->
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="search-box">
+								<div class="mb-3 row">
+									<label for="html5-search-input" class="col-md-2 col-form-label"
+										id="search">정산일자로 검색</label>
+									<div class="col-md-10">
+										<input type="date" id="dateSearchFirst" value=""
+											class="form-control" /> <label>~</label> <input type="date"
+											id="dateSearchLast" value="" class="form-control" />
+									</div>
+								</div>
+								<div class="mb-3 row">
+									<label for="html5-search-input" class="col-md-2 col-form-label"
+										id="search">거래일자로 검색</label>
+									<div class="col-md-10">
+										<input type="date" id="dateSearchFirst" value=""
+											class="form-control" /> <label>~</label> <input type="date"
+											id="dateSearchLast" value="" class="form-control" />
+									</div>
+								</div>
+								<div class="mt-2" style="text-align: center;">
+									<a href="" class="btn btn-primary me-2">검색하기</a>
+									<button type="reset" class="btn btn-primary2 me-2">초기화</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 매출액 -->
+				<div class="card mb-4">
+					<div class="card-body">
+						<div class="section_title mb-60" style="width: 50% !important">
+							<h2>매출액</h2>
+						</div>
+					</div>
+				</div>
+
+				<!-- Hoverable Table rows -->
+				<div class="card">
+
+					<div class="table-responsive text-nowrap" style="padding: 20px">
+						<table class="table table-hover"
+							style="text-align: center; vertical-align: middle;" id="tb">
+							<thead>
+								<tr>
+									<th>정산일자</th>
+									<th>거래일자</th>
+									<th>거래품명</th>
+									<th>거래금액</th>
+									<th>정산금액</th>
+									<th>정산여부</th>
+
+								</tr>
+							</thead>
+							<tbody class="table-border-bottom-0">
+								<tr th:each="list : ${profitList}">
+									<td>[[${list.minusDt}]]</td>
+									<td>[[${list.orderDt}]]</td>
+									<td>[[${list.name}]]</td>
+									<td>[[${list.totalPrice}]]</td>
+									<td>[[${list.minusPrice}]]</td>
+									<td>[[${list.minusYn}]]</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--/ Hoverable Table rows -->
+			</div>
+		</div>
+		<br>
+		<!-- / Content -->
+
+
+		<div class="content-backdrop fade"></div>
+	</div>
+	<!-- Content wrapper -->
+
+	<!--shop wrapper end-->
+
+	<!--shop  area end-->
+</body>
+</html>
