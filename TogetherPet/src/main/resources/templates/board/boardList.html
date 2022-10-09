@@ -97,14 +97,10 @@ a {
 .col-auto {
 	text-align: center;
 }
+
 body {
-    
-    
-    line-height: 1.25;
-   
+	line-height: 1.25;
 }
-
-
 </style>
 </head>
 <body>
@@ -136,7 +132,8 @@ body {
 								</p>
 							</div>
 						</div>
-						<br><br>
+						<br>
+						<br>
 						<!-- 검색기능 시작  -->
 						<form class="row gy-2 gx-3 align-items-center" id="btn">
 							<div class="col-auto">
@@ -156,10 +153,9 @@ body {
 							</div>
 						</form>
 						<!-- 검색기능 끝  -->
-						<br> <br>
-
-						<img class="primary_img" src="assets/img/likes/dogcat.png"
-								alt="consectetur" width="auto" height="auto" style = "float : right;">
+						<br> <br> <img class="primary_img"
+							src="assets/img/likes/dogcat.png" alt="consectetur" width="auto"
+							height="auto" style="float: right;">
 
 						<!-- 커뮤니티 게시판 반복문 스타트 -->
 						<div class="board_list_wrap">
@@ -172,12 +168,14 @@ body {
 										<th>작성일</th>
 										<th>작성자</th>
 										<th>조회수</th>
+										<th></th>
+										<th id="boardEmpty" style="display: none;">[[${#lists.size(pageInfo.list)}]]</th>
 
 									</tr>
 								</thead>
 
 								<tbody id="tb">
-									<tr th:each="b : ${pageInfo.list}">
+									<tr id="boardEmpty" th:each="b : ${pageInfo.list}">
 										<td><a th:href="@{boardSel(boardNo=${b.boardNo})}"
 											th:text="${b.boardNo}"></a></td>
 										<td><a th:href="@{boardSel(boardNo=${b.boardNo})}"
@@ -191,8 +189,8 @@ body {
 								</tbody>
 							</table>
 							<!-- 커뮤니티 게시판 반복문 끝 -->
-							
-					
+
+
 							<br> <br> <br>
 
 							<!-- 검색아작스 스크립트 시작  -->
@@ -224,6 +222,10 @@ body {
 																			}
 		    															 });
 		     
+		    									 
+		    									 
+		    									 
+		    									 
 		     function htmlView(data) {
 		    	//html로 변환해서 원하는 위치에 출력하도록 구현
 					
@@ -249,7 +251,7 @@ body {
 					     
 					};
 		</script>
-							
+
 
 							<div class="btnn">
 								<button type="button" value="등록" class="btn btn-primary"
@@ -264,7 +266,7 @@ body {
 						<br> <br> <br>
 
 						<!-- 페이지네이션 -->
-							<nav aria-label="Page navigation example">
+						<nav aria-label="Page navigation example">
 							<ul class="pagination pagination-info  justify-content-center">
 								<li class="page-item disabled"
 									th:if="${pageInfo.isIsFirstPage()}"><span
@@ -299,6 +301,18 @@ body {
 					<script>
 					function gopage(p) {
 						location.href = '/boardList?pageNum=' + p;}
+				
+					
+					
+					
+					// 작성한 글 없을때
+				    if($('#boardEmpty').html()=='0'){
+				    	$("#tb").html('');
+				    	$('#tb').html("<td><h4>글 없슴 ㅇㅅㅇ;;;</h4></td>");
+				    }
+					
+					
+					
 					</script>
 				</div>
 			</div>

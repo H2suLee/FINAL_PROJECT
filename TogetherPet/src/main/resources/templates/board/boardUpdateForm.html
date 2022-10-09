@@ -8,10 +8,14 @@
 <meta id="_csrf_header" name="_csrf_header"
 	th:content="${_csrf.headerName}" />
 <!-- 클래식 에디터 -->
-<script
+<!-- <script
 	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script
-	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
+
+<script src="//cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script>
+
+
 <title>수정하기</title>
 
 
@@ -415,6 +419,14 @@ a {
 										<textarea placeholder="내용 입력" id="editor" name="content"
 											th:value="${boardSel.content}" th:text="${boardSel.content}">
 											</textarea>
+											
+											<script type="text/javascript">
+ 												CKEDITOR.replace('editor'
+ 												, {filebrowserUploadUrl:'imageUpload.do'
+           										, height: 500, width: 1000
+         										});
+										    </script>
+										
 									</div>
 								</div>
 

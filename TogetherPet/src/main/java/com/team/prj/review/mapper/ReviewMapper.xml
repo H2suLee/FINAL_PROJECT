@@ -2,6 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.prj.review.mapper.ReviewMapper">
 
+	<select id="reviewSelectList"
+		resultType="com.team.prj.review.service.ReviewVO"
+		parameterType="com.team.prj.review.service.ReviewVO">
+		select *
+		from review
+	</select>
+
+	<select id="reviewSelect"
+		resultType="com.team.prj.review.service.ReviewVO"
+		parameterType="com.team.prj.review.service.ReviewVO">
+
+		select *
+		from review
+		where review_no = #{reviewNo}
+
+	</select>
+
+	<delete id="reviewDelete">
+		delete *
+		from review
+		where review_no = #{reviewNo}
+	</delete>
+	
+	
+	<insert id="reviewInsert" parameterType="com.team.prj.review.service.ReviewVO">
+		<selectKey keyProperty="ReviewVO" order="BEFORE" resultType="int">
+			SELECT 
+			    CASE WHEN max(comment_no) IS NULL 
+			    THEN 1
+			    ELSE max(comment_no) + 1 
+			    END AS no
+			FROM comments
+		</selectKey>
+		
+		INSERT INTO review
+		VALUES(#{reviewNo}
+				,#{title}
+				,#{content}
+				,#{star}
+				,#{boardNo}
+				,#{categoryId}
+				,#{groupNo}
+				,#{userNo})
+	</insert>
 
 
 </mapper>

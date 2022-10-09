@@ -10,7 +10,8 @@
 		ORDER BY FUNERAL_NO
 	</select>
 
-	<select id="funeralSelect" parameterType="com.team.prj.funeral.service.FuneralVO"
+	<select id="funeralSelect"
+		parameterType="com.team.prj.funeral.service.FuneralVO"
 		resultType="com.team.prj.funeral.service.FuneralVO">
 
 		SELECT FUNERAL_NO,
@@ -23,18 +24,28 @@
 		LATITUDE,
 		LONGITUDE,
 		CATEGORY_ID
-		
+
 		FROM FUNERAL
 		WHERE FUNERAL_NO=#{funeralNo}
 
 	</select>
 
-			<!-- 소현 스크랩 용도  -->
-			<insert id="scrapInsert" parameterType="com.team.prj.scrap.service.ScrapVO">
-				INSERT INTO SCRAP (SCRAP_NO,USER_NO,BOARD_NO,DT,CATEGORY_ID)
-				VALUES ((SELECT NVL(MAX(SCRAP_NO), 0) + 1 FROM SCRAP),#{userNo},#{boardNo},sysdate,#{categoryId})
-			</insert>
-	
+	<!-- 소현 스크랩 용도 -->
+	<insert id="scrapInsert"
+		parameterType="com.team.prj.scrap.service.ScrapVO">
+		INSERT INTO SCRAP (SCRAP_NO,USER_NO,BOARD_NO,DT,CATEGORY_ID)
+		VALUES ((SELECT NVL(MAX(SCRAP_NO), 0) + 1 FROM
+		SCRAP),#{userNo},#{boardNo},sysdate,#{categoryId})
+	</insert>
+
+
+	<select id="reviewSelectList"
+		resultType="com.team.prj.review.service.ReviewVO"
+		parameterType="com.team.prj.review.service.ReviewVO">
+		select *
+		from review
+		where category_id='f'
+	</select>
 
 
 </mapper>

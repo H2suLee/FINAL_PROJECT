@@ -31,8 +31,7 @@ import com.team.prj.board.service.BoardService;
 import com.team.prj.board.service.BoardVO;
 
 import com.team.prj.comment.service.CommentVO;
-import com.team.prj.scrap.service.ScrapService;
-import com.team.prj.scrap.service.ScrapVO;
+
 import com.team.prj.users.service.UsersService;
 
 //@controller + @responseBody 합쳐진것 호출한페이지로 결과를돌려준다.
@@ -45,8 +44,7 @@ public class BoardAjaxController {
 	@Autowired
 	private UsersService user; // 개인회원
 	
-	@Autowired
-	private ScrapService Sservice;	
+	
 	@Value("${file.dir}")
 	private String fileDir;
 
@@ -82,12 +80,8 @@ public class BoardAjaxController {
 	
 	
 	//이미지리스트 정보를 서버에 담아줌
-		@PostMapping(value="boardPhoto", produces = MediaType.APPLICATION_JSON_VALUE)
+		@PostMapping(value="/boardPhoto", produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody
-
-
-
-
 		 public ResponseEntity<List<BoardVO>> boardPhoto(MultipartFile[] uploadFile){
 			
 			///// 이미지 파일 맞는지 체크 /////
@@ -154,7 +148,7 @@ public class BoardAjaxController {
 		}
 	
 			//이미지 화면에 보여줌 
-			@RequestMapping("/disPlay")
+			@RequestMapping("/disPlay.do")
 			public ResponseEntity<byte[]> getImage(String fileName){
 				File file = new File("C:\\Temp" + fileName);
 				

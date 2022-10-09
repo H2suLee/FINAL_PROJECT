@@ -10,22 +10,15 @@ import com.team.prj.review.service.ReviewVO;
 
 @Controller
 public class ReviewController {
-	
-
-	
 	@Autowired
-	private ReviewService Service;
+	private ReviewService service;
 	
-	//리뷰 전체조회
-	
-	@GetMapping("/reviewSelectList")
-	
-	public String reviewSelectList(ReviewVO vo ,Model model) {
-		model.addAttribute("reviewList",Service.reviewSelectList());
-		return "user/reviewSelectList";
+	//리뷰전체조회
+	@GetMapping("reviewSelectList")
+	public String reviewSelectList(ReviewVO vo, Model model) {
+		model.addAttribute("reviewList",service.reviewSelectList(vo));
+		return "funeral/reviewSelectList";
 		
-	
 	}
-	
 	
 }

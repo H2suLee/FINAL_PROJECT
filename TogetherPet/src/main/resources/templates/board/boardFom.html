@@ -8,10 +8,13 @@
 <meta id="_csrf_header" name="_csrf_header"
 	th:content="${_csrf.headerName}" />
 <!-- 클래식 에디터 -->
-<script
+<!-- <script
 	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script
-	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+	src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
+
+<script src="//cdn.ckeditor.com/4.17.1/full/ckeditor.js"></script>
+
 <title>Insert title here</title>
 <style>
 .ck.ck-editor {
@@ -300,15 +303,15 @@ a {
 	width: 50px;
 	height: 50px;
 }
-.btn btn-primary2{
-background-color:dark;
-text-align: center;
+
+.btn btn-primary2 {
+	background-color: dark;
+	text-align: center;
 }
 
-.btnn{
-text-align: center;
+.btnn {
+	text-align: center;
 }
-
 </style>
 </head>
 <body>
@@ -342,20 +345,18 @@ text-align: center;
 					</div>
 
 					<form id="frm" action="boardIns" method="post"
-						enctype="multipart/form-data" onsubmit="return validateForm()" >
+						enctype="multipart/form-data" onsubmit="return validateForm()">
 						<input type="hidden" th:name="${_csrf.parameterName}"
 							th:value="${_csrf.token}">
 						<div class="board_wrap">
 							<div class="board_title">
-								<strong>자유게시판</strong> <br> <br>
-									<select id="category" name="category">
-											<option value="">카테고리</option>
-											<option value="FREE">FREE</option>
-											<option value="NOTICE">NOTICE</option>
-											<option value="Q&A">Q&A</option>
-										</select>
-
-								<br> <br>
+								<strong>자유게시판</strong> <br> <br> <select id="category"
+									name="category">
+									<option value="">카테고리</option>
+									<option value="FREE">FREE</option>
+									<option value="NOTICE">NOTICE</option>
+									<option value="Q&A">Q&A</option>
+								</select> <br> <br>
 							</div>
 							<div class="board_write_wrap">
 								<div class="board_write">
@@ -363,7 +364,7 @@ text-align: center;
 										<dl>
 											<dt>제목</dt>
 											<dd>
-												<input type="text" id="title" name="title" >
+												<input type="text" id="title" name="title">
 											</dd>
 										</dl>
 									</div>
@@ -372,12 +373,12 @@ text-align: center;
 									<div class="info">
 										<dl>
 											<dt>글쓴이</dt>
-											 <dd>
-												<input type="text" id="nickname" name="nickname" th:value="${session.user.nickname}"
-												disabled="disabled">
+											<dd>
+												<input type="text" id="nickname" name="nickname"
+													th:value="${session.user.nickname}" disabled="disabled">
 												<!-- <input type="text" id="nickname" name="nickname"> -->
-											</dd> 
-											
+											</dd>
+
 										</dl>
 
 										<dl>
@@ -389,60 +390,68 @@ text-align: center;
 
 										<dl>
 											<dt>첨부파일</dt>
-											<dd><br>
-												<br>
-												<input type="file" id="file" name="file" th:name="file">
-												<br>
+											<dd>
+												<br> <br> <input type="file" id="file" name="file"
+													th:name="file"> <br>
 												<h6>파일당 10MB까지 첨부 가능합니다.</h6>
 											</dd>
 										</dl>
-										
+
 										<dl>
 											<dt></dt>
 											<dd>
-												<input type="hidden" id="userNo" name="userNo" 
-												th:value="${session.user.userNo}" disabled="disabled"> 
-											<!-- <input type="text" id="userNo" name="userNo">  -->
+												<input type="hidden" id="userNo" name="userNo"
+													th:value="${session.user.userNo}" disabled="disabled">
+												<!-- <input type="text" id="userNo" name="userNo">  -->
 											</dd>
 										</dl>
-										
+
 									</div>
-									
-									
+
+
 									<div class="cont">
 										<textarea placeholder="내용 입력" id="editor" name="content"></textarea>
+										<script type="text/javascript">
+ 											CKEDITOR.replace('editor'
+ 												, {filebrowserUploadUrl:'boardIns.do'
+           										, height: 500, width: 1000
+         										});
+										</script>
 									</div>
 								</div>
-											
-											<br>
-											<br>
-											<br>
-											
+
+								<br> <br> <br>
+
 								<div class="btnn">
-									<input type="button" value="등록" class="btn btn-primary"  onclick="validateForm()">
-									<a href="boardList" class="btn btn-primary">취소</a>
+									<input type="button" value="등록" class="btn btn-primary"
+										onclick="validateForm()"> <a href="boardList"
+										class="btn btn-primary">취소</a>
 								</div>
-								
+
 							</div>
 						</div>
 					</form>
 				</div>
-				
-				<script>
+
+				<!-- <script>
 					ClassicEditor.create(document.querySelector('#editor'), {
 						language : "ko",
 						ckfinder : {
 							uploadUrl:'/ajax/image.do'
 						}
 					});
-				</script>
-				
+				</script> -->
+
+
+
+
+
 				<script>
  				 document.getElementById('dt').value = new Date().toISOString().substring(0, 10);;
 				</script>
-				
-				
-				
+
+
+
 				<script>
 				
 				function validateForm(){
@@ -453,7 +462,7 @@ text-align: center;
 	                }
 	                frm.submit();
 	            }
-				</script>	
+				</script>
 			</div>
 		</div>
 	</article>
